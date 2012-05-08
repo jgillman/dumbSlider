@@ -1,57 +1,60 @@
-/*
- *  Project: dumbSlider
- *  Description: A really dumb slideshow
- *  Author: Joel Gillman
- *  License: whatever
- */
 
-;(function ( $, window, undefined ) {
+;(function( $, window, undefined ){
 
-    var dumbSlider = 'dumbSlider',
-        document = window.document,
-        defaults = {
-            duration: 3000,
-            nextButton: null,
-            prevButton: null
-        };
+	var DumbSlider = function( element, options ){
+			this.element = element;
+			this.$element = $(element);
+			this.options = options;
 
-    function Plugin( element, options ) {
-        this.element = element;
+			// this next line takes advantage of HTML5 data attributes
+			// to support customization with the plugin on a per-element
+			// basis. eg
+			// <div class=item' data-plugin-options='{"message":"Goodbye World!"}'></div>
+			this.metadata = this.$element.data( 'plugin-options' );
+		};
 
-        this.options = $.extend( {}, defaults, options) ;
+	// the plugin prototype
+	DumbSlider.prototype = {
+		defaults: {
+			duration: 3000,
+			nextButton: null,
+			prevButton: null
+		},
 
-        this._defaults = defaults;
-        this._name = dumbSlider;
+		init: function() {
+			// Introduce defaults that can be extended either globally or using an
+			// an object literal.
+			this.config = $.extend({}, this.defaults, this.options, this.metadata);
 
-        this.init();
-    }
+			console.log(this.element, this.options)
+			this.initContent();
+			this.initEvents();
 
-    Plugin.prototype.init = function () {
-        console.log(this.element, this.options)
-        this.initContent();
-        this.initEvents();
-    };
+			// this.sampleMethod();
+			return this;
+		},
 
-    Plugin.prototype.initContent = function () {
-        // wrapInner so we have a slide container that can move
-        $(this.element).wrapInner('<div class="' + this.getIdentifier(this.element) + 'Wrapper" />')
-    };
+		initContent: function() {
+			// wrapInner so we have a slide container that can move
+			$(this.element).wrapInner('<div class="' + this.getIdentifier(this.element) + 'Wrapper" />');
+		},
 
-    Plugin.prototype.getIdentifier = function (element) {
-        return this.element.id || this.element.className.split(' ')[0]
-    }
+		initEvents: function() {
+			// if nextButton isn't null add event
+			// if prevButton isn't null add event
+		},
 
-    Plugin.prototype.initEvents = function () {
-        // if nextButton isn't null add event
-        // if prevButton isn't null add event
-    };
+		getIdentifier: function(element) {
+			return this.element.id || this.element.className.split(' ')[0]
+		}
+	}
 
-    $.fn[dumbSlider] = function ( options ) {
-        return this.each(function () {
-            if (!$.data(this, 'plugin_' + dumbSlider)) {
-                $.data(this, 'plugin_' + dumbSlider, new Plugin( this, options ));
-            }
-        });
-    };
+	DumbSlider.defaults = DumbSlider.prototype.defaults;
 
-}(jQuery, window));
+	$.fn.dumbSlider = function(options) {
+		return this.each(function() {
+			new DumbSlider(this, options).init();
+		});
+	};
+
+})( jQuery, window );
