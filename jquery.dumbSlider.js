@@ -18,8 +18,7 @@
 		defaults: {
 			duration: 3000,
 			nextButton: null,
-			prevButton: null,
-			carousel: false
+			prevButton: null
 		},
 
 		wrapper: null,
@@ -46,9 +45,11 @@
 				.wrapInner('<div class="' + this.getIdentifier(this.element) + 'Wrapper" />')
 				.children().first();
 
-			// Make wrapper wide enough for all the images plus one.
+			this.slideCount = this.wrapper.children().length;
+
+			// Make wrapper wide enough for all the images.
 			this.wrapper.width(function() {
-				return thisContext.$element.width() * ( $(this).children().length + 1 );
+				return thisContext.$element.width() * $(this).children().length;
 			});
 		},
 
@@ -64,20 +65,33 @@
 			}
 		},
 
+		updatePosition: function() {
+			// Set margin-left 
+			this.wrapper.css('margin-left', (-1 * this.$element.width() * this.currentSlide));
+		},
+
 		onNextClick: function(event) {
 			var thisContext = event.data;
+
 			thisContext.currentSlide++;
-			console.log("NEXT!!!", thisContext.currentSlide);
+
+			if ( thisContext.currentSlide > thisContext.slideCount - 1 ) {
+				thisContext.currentSlide = 0;
+			}
+
+			thisContext.updatePosition();
 		},
 
 		onPrevClick: function(event) {
 			var thisContext = event.data;
+
 			thisContext.currentSlide--;
-			console.log("PREV!!!", thisContext.currentSlide);
-		},
 
-		updatePosition: function() {
+			if ( thisContext.currentSlide < 0 ) {
+				thisContext.currentSlide = thisContext.slideCount - 1;
+			}
 
+			thisContext.updatePosition();
 		},
 
 		getIdentifier: function(element) {
