@@ -22,13 +22,13 @@ and be on my way.
 
 ### Next and previous buttons?
 
-I always make them myself and half of the sliders out there try to
-make them for you or force you to use a specific naming convention.
-That's dumb.
+Make them yourself. Half of the sliders out there try to make buttons
+for you or force you to use a specific naming convention. That's dumb.
+**Just make them and tell the plugin what the selector is.**
 
 ### Fancy transitions?
 
-I want a slideshow not a PowerPoint.
+I wanted a dumb slideshow not a PowerPoint.
 
 ### Little dots or page numbers?
 
@@ -43,4 +43,4 @@ are welcome though major features will probably be ignored.
 Who are you again?
 ------------
 
-I'm [Joel Gillman](http://joelgillman.com/)
+I'm [Joel Gillman](http://joelgillman.com/).
