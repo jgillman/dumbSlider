@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>dumbSlider Test</title>
+
+	<style type="text/css">
+		.myDumbSlides {
+			width: 600px;
+			height: 400px;
+			overflow: hidden;
+		}
+		.myDumbSlides img {
+			float: left;
+		}
+	</style>
+</head>
+<body>
+
+<div class="myDumbSlides">
+	<img src="http://dummyimage.com/600x400&text=zero">
+	<img src="http://dummyimage.com/600x400&text=1">
+	<img src="http://dummyimage.com/600x400&text=2">
+	<img src="http://dummyimage.com/600x400&text=3">
+	<img src="http://dummyimage.com/600x400&text=4">
+</div>
+
+<span id="next">next</span>
+<span id="previous">previous</span>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/jquery.dumbSlider.js"></script>
+<script>
+	$('.myDumbSlides').dumbSlider({
+		nextButton: '#next',
+        prevButton: '#previous'
+	});
+</script>
+
+</body>
+</html>
