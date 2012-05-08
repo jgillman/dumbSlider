@@ -18,8 +18,13 @@
 		defaults: {
 			duration: 3000,
 			nextButton: null,
-			prevButton: null
+			prevButton: null,
+			carousel: false
 		},
+
+		wrapper: null,
+		slideCount: 0,
+		currentSlide: 0,
 
 		init: function() {
 			// Introduce defaults that can be extended either globally or using an
@@ -29,19 +34,50 @@
 			console.log(this.element, this.options)
 			this.initContent();
 			this.initEvents();
-
-			// this.sampleMethod();
+			
 			return this;
 		},
 
 		initContent: function() {
-			// wrapInner so we have a slide container that can move
-			$(this.element).wrapInner('<div class="' + this.getIdentifier(this.element) + 'Wrapper" />');
+			var thisContext = this;
+
+			// Wrap children with a wrapper so we can move the slides.
+			this.wrapper = $(this.element)
+				.wrapInner('<div class="' + this.getIdentifier(this.element) + 'Wrapper" />')
+				.children().first();
+
+			// Make wrapper wide enough for all the images plus one.
+			this.wrapper.width(function() {
+				return thisContext.$element.width() * ( $(this).children().length + 1 );
+			});
 		},
 
 		initEvents: function() {
-			// if nextButton isn't null add event
-			// if prevButton isn't null add event
+			// Set the 'next' button event if nextButton exists
+			if ( this.options.nextButton ) {
+				$(this.options.nextButton).click(this, this.onNextClick);
+			}
+
+			// Set the 'previous' button event if nextButton exists
+			if ( this.options.prevButton ) {
+				$(this.options.prevButton).click(this, this.onPrevClick);
+			}
+		},
+
+		onNextClick: function(event) {
+			var thisContext = event.data;
+			thisContext.currentSlide++;
+			console.log("NEXT!!!", thisContext.currentSlide);
+		},
+
+		onPrevClick: function(event) {
+			var thisContext = event.data;
+			thisContext.currentSlide--;
+			console.log("PREV!!!", thisContext.currentSlide);
+		},
+
+		updatePosition: function() {
+
 		},
 
 		getIdentifier: function(element) {
