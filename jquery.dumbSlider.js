@@ -45,12 +45,15 @@
 				.wrapInner('<div class="' + this.getIdentifier(this.element) + 'Wrapper" />')
 				.children().first();
 
+			// Store the number of slides for later use
 			this.slideCount = this.wrapper.children().length;
 
 			// Make wrapper wide enough for all the images.
 			this.wrapper.width(function() {
 				return thisContext.$element.width() * $(this).children().length;
 			});
+
+			this.prefixify('user-select', this.wrapper);
 		},
 
 		initEvents: function() {
@@ -96,6 +99,16 @@
 
 		getIdentifier: function(element) {
 			return this.element.id || this.element.className.split(' ')[0]
+		},
+
+		prefixify: function(style, $element) {
+			var prefixes = ['-webkit-','-moz-','-ms-','-o-'];
+			
+			for ( i in prefixes ) {
+				prefix = prefixes[i];
+				console.log(prefix, style, $element);
+				// $element.css();
+			}
 		}
 	}
 
