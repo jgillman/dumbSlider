@@ -16,7 +16,7 @@
 	// the plugin prototype
 	DumbSlider.prototype = {
 		defaults: {
-			duration: 3000,
+			duration: 600,
 			nextButton: null,
 			prevButton: null
 		},
