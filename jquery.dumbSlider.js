@@ -30,7 +30,6 @@
 			// an object literal.
 			this.config = $.extend({}, this.defaults, this.options, this.metadata);
 
-			console.log(this.element, this.options)
 			this.initContent();
 			this.initEvents();
 			
@@ -53,18 +52,20 @@
 				return thisContext.$element.width() * $(this).children().length;
 			});
 
-			this.prefixify('user-select', this.wrapper);
+			this.prefixify('transition', ['margin-left ',this.config.duration,'ms'].join(''), this.wrapper);
 		},
 
 		initEvents: function() {
 			// Set the 'next' button event if nextButton exists
-			if ( this.options.nextButton ) {
-				$(this.options.nextButton).click(this, this.onNextClick);
+			if ( this.config.nextButton ) {
+				$(this.config.nextButton).click(this, this.onNextClick);
+				this.prefixify('user-select', 'none', $(this.config.nextButton));
 			}
 
 			// Set the 'previous' button event if nextButton exists
-			if ( this.options.prevButton ) {
-				$(this.options.prevButton).click(this, this.onPrevClick);
+			if ( this.config.prevButton ) {
+				$(this.config.prevButton).click(this, this.onPrevClick);
+				this.prefixify('user-select', 'none', $(this.config.prevButton));
 			}
 		},
 
@@ -101,13 +102,12 @@
 			return this.element.id || this.element.className.split(' ')[0]
 		},
 
-		prefixify: function(style, $element) {
+		prefixify: function(style, value, $element) {
 			var prefixes = ['-webkit-','-moz-','-ms-','-o-'];
 			
 			for ( i in prefixes ) {
 				prefix = prefixes[i];
-				console.log(prefix, style, $element);
-				// $element.css();
+				$element.css([prefix,style].join(''), value);
 			}
 		}
 	}
