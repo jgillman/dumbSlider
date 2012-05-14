@@ -30,7 +30,6 @@
 			// an object literal.
 			this.config = $.extend({}, this.defaults, this.options, this.metadata);
 
-			console.log(this.element, this.options)
 			this.initContent();
 			this.initEvents();
 			
@@ -45,23 +44,28 @@
 				.wrapInner('<div class="' + this.getIdentifier(this.element) + 'Wrapper" />')
 				.children().first();
 
+			// Store the number of slides for later use
 			this.slideCount = this.wrapper.children().length;
 
 			// Make wrapper wide enough for all the images.
 			this.wrapper.width(function() {
 				return thisContext.$element.width() * $(this).children().length;
 			});
+
+			this.prefixify('transition', ['margin-left ',this.config.duration,'ms'].join(''), this.wrapper);
 		},
 
 		initEvents: function() {
 			// Set the 'next' button event if nextButton exists
-			if ( this.options.nextButton ) {
-				$(this.options.nextButton).click(this, this.onNextClick);
+			if ( this.config.nextButton ) {
+				$(this.config.nextButton).click(this, this.onNextClick);
+				this.prefixify('user-select', 'none', $(this.config.nextButton));
 			}
 
 			// Set the 'previous' button event if nextButton exists
-			if ( this.options.prevButton ) {
-				$(this.options.prevButton).click(this, this.onPrevClick);
+			if ( this.config.prevButton ) {
+				$(this.config.prevButton).click(this, this.onPrevClick);
+				this.prefixify('user-select', 'none', $(this.config.prevButton));
 			}
 		},
 
@@ -96,6 +100,15 @@
 
 		getIdentifier: function(element) {
 			return this.element.id || this.element.className.split(' ')[0]
+		},
+
+		prefixify: function(style, value, $element) {
+			var prefixes = ['-webkit-','-moz-','-ms-','-o-'];
+			
+			for ( i in prefixes ) {
+				prefix = prefixes[i];
+				$element.css([prefix,style].join(''), value);
+			}
 		}
 	}
 
