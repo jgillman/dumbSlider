@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>dumbSlider by jgillman</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>dumbSlider</h1>
+        <p>A really dumb jQuery plugin for stupid slideshows.</p>
+        <p class="view"><a href="https://github.com/jgillman/dumbSlider">View the Project on GitHub <small>jgillman/dumbSlider</small></a></p>
+        <ul>
+          <li><a href="https://github.com/jgillman/dumbSlider/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jgillman/dumbSlider/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jgillman/dumbSlider">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>What you need</h2>
+
+<p>You will need the following to start using dumbSlider.</p>
+
+<ul>
+<li>jQuery 1.7</li>
+<li>An element with a few images in it (a <code>div</code> will do)</li>
+<li>A few styles for aforementioned <code>div</code>
+(height, width, overflow:hidden should be fine)</li>
+</ul><h2>Usage</h2>
+
+<p>Make a block level container (like a div) and put some images in that thing.</p>
+
+<div class="highlight">
+<pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"myDumbSlides"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/image/0.png"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/image/1.png"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/image/2.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre>
+</div>
+
+
+<p>Apply some baseline css.</p>
+
+<div class="highlight">
+<pre><span class="nc">.myDumbSlides</span> <span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">600px</span><span class="p">;</span>
+  <span class="k">height</span><span class="o">:</span> <span class="m">400px</span><span class="p">;</span>
+  <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.myDumbSlides</span> <span class="nt">img</span> <span class="p">{</span>
+  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+
+<p>Hook up the JavaScript.</p>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">(</span><span class="s1">'.myDumbSlides'</span><span class="p">).</span><span class="nx">dumbSlider</span><span class="p">({</span>
+  <span class="nx">nextButton</span><span class="o">:</span> <span class="s1">'#next'</span><span class="p">,</span>
+  <span class="nx">prevButton</span><span class="o">:</span> <span class="s1">'#previous'</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<p>Yer done.</p>
+
+<p>It should be noted that if you don't define any buttons dumbSlider will auto advance your slides.</p>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">(</span><span class="s1">'.myDumbSlides'</span><span class="p">).</span><span class="nx">dumbSlider</span><span class="p">();</span>
+
+<span class="c1">// Optionally change the advance rate (in milliseconds):</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'.myDumbSlides'</span><span class="p">).</span><span class="nx">dumbSlider</span><span class="p">({</span>
+  <span class="nx">autoSlideInterval</span><span class="o">:</span> <span class="mi">8000</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<h2>Why I made it</h2>
+
+<p>I found myself creating the same dumb slideshow over and over. All I
+want is to throw a bunch of dumb images in a stupid div, apply some JS
+and be on my way.</p>
+
+<h3>Next and previous buttons?</h3>
+
+<p>Make them yourself. Half of the sliders out there try to make buttons
+for you or force you to use a specific naming convention. That's dumb.
+<strong>Just make them and tell the plugin what the selector is.</strong></p>
+
+<h3>Fancy transitions?</h3>
+
+<p>I wanted a dumb slideshow not a PowerPoint.</p>
+
+<h3>Little dots or page numbers?</h3>
+
+<p>Too hard. If you want that fork <em>this</em>.</p>
+
+<h2>Contributing</h2>
+
+<p>Seriously though, if you want to contribute please do! Improvements
+are welcome though major features will probably be ignored.</p>
+
+<h2>Who are you again?</h2>
+
+<p>I'm <a href="http://joelgillman.com/">Joel Gillman</a>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jgillman">jgillman</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-3212830-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
