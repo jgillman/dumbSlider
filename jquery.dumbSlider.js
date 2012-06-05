@@ -41,7 +41,7 @@
 			else {
 				this.initEvents();
 			}
-
+			
 			return this;
 		},
 
@@ -87,14 +87,14 @@
 		},
 
 		updatePosition: function() {
-			// Set margin-left
+			// Set margin-left 
 			this.wrapper.css('margin-left', (-1 * this.$element.width() * this.currentSlide));
 
 			if ( this.config.callback ) {
 				this.config.callback(this);
 			}
 		},
-
+		
 		nextSlide: function() {
 			this.currentSlide++;
 
@@ -131,7 +131,7 @@
 
 		prefixify: function(style, value, $element) {
 			var prefixes = ['-webkit-','-moz-','-ms-','-o-'];
-
+			
 			for ( i in prefixes ) {
 				prefix = prefixes[i];
 				$element.css([prefix,style].join(''), value);
