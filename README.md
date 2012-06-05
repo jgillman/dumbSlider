@@ -45,6 +45,18 @@ $('.myDumbSlides').dumbSlider({
 });
 ```
 
+Yer done.
+
+It should be noted that if you don't define any buttons dumbSlider will auto advance your slides.
+```javascript
+$('.myDumbSlides').dumbSlider();
+
+// Optionally change the advance rate (in milliseconds):
+$('.myDumbSlides').dumbSlider({
+  autoSlideInterval: 8000
+});
+```
+
 Why I made it
 ------------
 
