@@ -4,7 +4,7 @@ DumbSlider
 A really dumb jQuery plugin for stupid slideshows.
 
 What you need
--------
+------------
 
 You will need the following to start using DumbSlider.
 
@@ -12,6 +12,38 @@ You will need the following to start using DumbSlider.
 * An element with a few images in it (a `div` will do)
 * A few styles for aforementioned `div`
   (height, width, overflow:hidden should be fine)
+
+Usage
+------------
+
+Make a block level container (like a div) and put some images in that thing.
+```html
+<div class="myDumbSlides">
+  <img src="/image/0.png">
+  <img src="/image/1.png">
+  <img src="/image/2.png">
+</div>
+```
+
+Apply some baseline css.
+```css
+.myDumbSlides {
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+}
+.myDumbSlides img {
+  float: left;
+}
+```
+
+Hook up the JavaScript.
+```javascript
+$('.myDumbSlides').dumbSlider({
+  nextButton: '#next',
+  prevButton: '#previous'
+});
+```
 
 Why I made it
 ------------
