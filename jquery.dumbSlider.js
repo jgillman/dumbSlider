@@ -18,7 +18,8 @@
 		defaults: {
 			duration: 600,
 			nextButton: null,
-			prevButton: null
+			prevButton: null,
+			callback: null
 		},
 
 		wrapper: null,
@@ -72,6 +73,10 @@
 		updatePosition: function() {
 			// Set margin-left 
 			this.wrapper.css('margin-left', (-1 * this.$element.width() * this.currentSlide));
+
+			if ( this.config.callback ) {
+				this.config.callback(this);
+			}
 		},
 
 		onNextClick: function(event) {
