@@ -16,6 +16,7 @@
 	// the plugin prototype
 	DumbSlider.prototype = {
 		defaults: {
+			autoSlideInterval: 6000,
 			duration: 600,
 			nextButton: null,
 			prevButton: null,
@@ -32,7 +33,14 @@
 			this.config = $.extend({}, this.defaults, this.options, this.metadata);
 
 			this.initContent();
-			this.initEvents();
+
+			// No buttons? Better advance automatically.
+			if ( !this.config.nextButton && !this.config.prevButton ) {
+				this.initInterval();
+			}
+			else {
+				this.initEvents();
+			}
 			
 			return this;
 		},
@@ -54,6 +62,14 @@
 			});
 
 			this.prefixify('transition', ['margin-left ',this.config.duration,'ms'].join(''), this.wrapper);
+		},
+
+		initInterval: function() {
+			var thisContext = this;
+
+			this.slideInterval = setInterval(function() {
+				thisContext.nextSlide();
+			}, this.config.autoSlideInterval);
 		},
 
 		initEvents: function() {
@@ -78,29 +94,35 @@
 				this.config.callback(this);
 			}
 		},
+		
+		nextSlide: function() {
+			this.currentSlide++;
+
+			if ( this.currentSlide > this.slideCount - 1 ) {
+				this.currentSlide = 0;
+			}
+
+			this.updatePosition();
+		},
+
+		prevSlide: function() {
+			this.currentSlide--;
+
+			if ( this.currentSlide < 0 ) {
+				this.currentSlide = this.slideCount - 1;
+			}
+
+			this.updatePosition();
+		},
 
 		onNextClick: function(event) {
 			var thisContext = event.data;
-
-			thisContext.currentSlide++;
-
-			if ( thisContext.currentSlide > thisContext.slideCount - 1 ) {
-				thisContext.currentSlide = 0;
-			}
-
-			thisContext.updatePosition();
+			thisContext.nextSlide();
 		},
 
 		onPrevClick: function(event) {
 			var thisContext = event.data;
-
-			thisContext.currentSlide--;
-
-			if ( thisContext.currentSlide < 0 ) {
-				thisContext.currentSlide = thisContext.slideCount - 1;
-			}
-
-			thisContext.updatePosition();
+			thisContext.prevSlide();
 		},
 
 		getIdentifier: function(element) {
