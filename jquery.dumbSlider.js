@@ -2,16 +2,16 @@
 ;(function( $, window, undefined ){
 
 	var DumbSlider = function( element, options ){
-			this.element = element;
-			this.$element = $(element);
-			this.options = options;
+		this.element = element;
+		this.$element = $(element);
+		this.options = options;
 
-			// this next line takes advantage of HTML5 data attributes
-			// to support customization with the plugin on a per-element
-			// basis. eg
-			// <div class=item' data-plugin-options='{"message":"Goodbye World!"}'></div>
-			this.metadata = this.$element.data( 'plugin-options' );
-		};
+		// this next line takes advantage of HTML5 data attributes
+		// to support customization with the plugin on a per-element
+		// basis. eg
+		// <div class=item' data-plugin-options='{"message":"Goodbye World!"}'></div>
+		this.metadata = this.$element.data( 'plugin-options' );
+	};
 
 	// the plugin prototype
 	DumbSlider.prototype = {
